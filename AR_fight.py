@@ -15,7 +15,7 @@ chrome_options.add_argument("--disable-extensions")
 chrome_options.add_argument("--proxy-server='direct://'")
 chrome_options.add_argument("--proxy-bypass-list=*")
 chrome_options.add_argument("--start-maximized")
-chrome_options.add_argument('--headless')
+# chrome_options.add_argument('--headless')
 chrome_options.add_argument('--disable-gpu')
 chrome_options.add_argument('--disable-dev-shm-usage')
 chrome_options.add_argument('--no-sandbox')
@@ -45,28 +45,48 @@ def main(Login, Password, Acc):
     time.sleep(5)
 
     #####BLCKS#####
-    driver.get("https://wax.bloks.io/account/ancientrealm?loadContract=true&tab=Actions&account=ancientrealm&scope=ancientrealm&limit=100&action=fight")
+    driver.get("https://wax.bloks.io/account/ancientrealm?loadContract=true&tab=Actions&account=ancientrealm&scope=ancientrealm&limit=100")
     WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, "//span[text()='Login']"))).click()
     WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, "//div[text()='Cloud Wallet']"))).click()
     time.sleep(5)
 
     ####MINERS####
-    miner = driver.find_element_by_xpath("//input[@placeholder='Enter account name...']")
-    miner.clear()
-    miner.send_keys(Acc)
-    miner1 = driver.find_element(By.XPATH, "//input[@placeholder='Enter number...']")
-    miner1.clear()
-    miner1.send_keys("15")
     timer = 1
     while timer < 20:
         timer += 1
-        driver.find_element_by_xpath("//button[text()=' Submit Transaction ']").click()
+
+        driver.find_element(By.XPATH, "//span[text() = ' fight ']").click()
+        name = driver.find_element(By.XPATH, "//input[@placeholder='Enter account name...']")
+        name.clear()
+        name.send_keys(Acc)
+        num = driver.find_element(By.XPATH, "//input[@placeholder='Enter number...']")
+        num.clear()
+        num.send_keys("15")
+        but = driver.find_element(By.XPATH, "//button[text()=' Submit Transaction ']").click()
+        time.sleep(5)
+
+        driver.find_element(By.XPATH, "//span[text() = ' heal ']").click()
+        name = driver.find_element(By.XPATH, "//input[@placeholder='Enter account name...']")
+        name.clear()
+        name.send_keys(Acc)
+        num = driver.find_element(By.XPATH, "//input[@placeholder='Enter number...']")
+        num.clear()
+        num.send_keys("447")
+        but = driver.find_element(By.XPATH, "//button[text()=' Submit Transaction ']").click()
+        time.sleep(5)
+
+        driver.find_element(By.XPATH, "//span[text() = ' repair ']").click()
+        name.clear()
+        name.send_keys(Acc)
+        but = driver.find_element(By.XPATH, "//button[text()=' Submit Transaction ']").click()
+        time.sleep(5)
+
         print("!!!Mined!!!")
         current_datetime = datetime.now()
         print(current_datetime)
-        time.sleep(10820)
+        time.sleep(10805)
         if timer > 19:
-            timer = 1;
+            timer = 1
 
 if __name__ == "__main__":
     p = Pool(processes=count)
