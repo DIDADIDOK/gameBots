@@ -15,7 +15,7 @@ chrome_options.add_argument("--disable-extensions")
 chrome_options.add_argument("--proxy-server='direct://'")
 chrome_options.add_argument("--proxy-bypass-list=*")
 chrome_options.add_argument("--start-maximized")
-# chrome_options.add_argument('--headless')
+chrome_options.add_argument('--headless')
 chrome_options.add_argument('--disable-gpu')
 chrome_options.add_argument('--disable-dev-shm-usage')
 chrome_options.add_argument('--no-sandbox')
@@ -28,7 +28,7 @@ with open("AR_fight.txt", "r") as file:
     count = data["count"]
 
 def main(Login, Password, Acc):
-    ####LOGIN####
+    #### LOGIN ####
     print("Login in WAX account...")
     driver.maximize_window()
     driver.get("https://all-access.wax.io/")
@@ -44,17 +44,17 @@ def main(Login, Password, Acc):
     driver.find_element(By.XPATH, "//button[text()='Login']").click()
     time.sleep(5)
 
-    #####BLCKS#####
+    ##### BLCKS #####
     driver.get("https://wax.bloks.io/account/ancientrealm?loadContract=true&tab=Actions&account=ancientrealm&scope=ancientrealm&limit=100")
     WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, "//span[text()='Login']"))).click()
     WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, "//div[text()='Cloud Wallet']"))).click()
     time.sleep(5)
 
-    ####MINERS####
+    #### MINERS ####
     timer = 1
     while timer < 20:
         timer += 1
-
+        #### FIGHT ####
         driver.find_element(By.XPATH, "//span[text() = ' fight ']").click()
         name = driver.find_element(By.XPATH, "//input[@placeholder='Enter account name...']")
         name.clear()
@@ -64,7 +64,7 @@ def main(Login, Password, Acc):
         num.send_keys("15")
         but = driver.find_element(By.XPATH, "//button[text()=' Submit Transaction ']").click()
         time.sleep(5)
-
+        #### HEAL ####
         driver.find_element(By.XPATH, "//span[text() = ' heal ']").click()
         name = driver.find_element(By.XPATH, "//input[@placeholder='Enter account name...']")
         name.clear()
@@ -74,7 +74,7 @@ def main(Login, Password, Acc):
         num.send_keys("447")
         but = driver.find_element(By.XPATH, "//button[text()=' Submit Transaction ']").click()
         time.sleep(5)
-
+        #### REPAIR ####
         driver.find_element(By.XPATH, "//span[text() = ' repair ']").click()
         name.clear()
         name.send_keys(Acc)
